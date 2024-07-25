@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Quote</title>
+    <title>Quote of the Moment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,23 +36,13 @@
             "You have within you right now, everything you need to deal with whatever the world can throw at you."
         ];
 
-        function getDailyQuote() {
-            const today = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
-            const storedDate = localStorage.getItem('quoteDate');
-            const storedQuote = localStorage.getItem('quote');
-
-            if (storedDate === today && storedQuote) {
-                return storedQuote;
-            } else {
-                const randomIndex = Math.floor(Math.random() * quotes.length);
-                const newQuote = quotes[randomIndex];
-                localStorage.setItem('quoteDate', today);
-                localStorage.setItem('quote', newQuote);
-                return newQuote;
-            }
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            return quotes[randomIndex];
         }
 
-        document.getElementById('quote').innerText = getDailyQuote();
+        document.getElementById('quote').innerText = getRandomQuote();
     </script>
 </body>
 </html>
+

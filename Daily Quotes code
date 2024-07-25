@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .quote-container {
+            text-align: center;
+        }
+        .quote {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container">
+        <div id="quote" class="quote"></div>
+    </div>
+    <script>
+        const quotes = [
+            "The only limit to our realization of tomorrow is our doubts of today.",
+            "The purpose of our lives is to be happy.",
+            "Life is what happens when you're busy making other plans.",
+            "Get busy living or get busy dying.",
+            "You have within you right now, everything you need to deal with whatever the world can throw at you."
+        ];
+
+        function getDailyQuote() {
+            const today = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
+            const storedDate = localStorage.getItem('quoteDate');
+            const storedQuote = localStorage.getItem('quote');
+
+            if (storedDate === today && storedQuote) {
+                return storedQuote;
+            } else {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const newQuote = quotes[randomIndex];
+                localStorage.setItem('quoteDate', today);
+                localStorage.setItem('quote', newQuote);
+                return newQuote;
+            }
+        }
+
+        document.getElementById('quote').innerText = getDailyQuote();
+    </script>
+</body>
+</html>
